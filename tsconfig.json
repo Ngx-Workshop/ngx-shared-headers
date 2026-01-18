@@ -7,6 +7,11 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "paths": {
+      "ngx-shared-headers": [
+        "./dist/ngx-shared-headers"
+      ]
+    },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -21,5 +26,19 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/ngx-shared-headers/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-shared-headers/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-shared-headers-demo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/ngx-shared-headers-demo/tsconfig.spec.json"
+    }
+  ]
 }

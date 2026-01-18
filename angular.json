@@ -2,9 +2,106 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "efdbe901-f7d1-459e-9834-bda161a6d5fd"
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-shared-headers": {
+      "projectType": "library",
+      "root": "projects/ngx-shared-headers",
+      "sourceRoot": "projects/ngx-shared-headers/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-shared-headers/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-shared-headers/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ngx-shared-headers/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "ngx-shared-headers-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngx-shared-headers-demo",
+      "sourceRoot": "projects/ngx-shared-headers-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/ngx-shared-headers-demo/src/main.ts",
+            "tsConfig": "projects/ngx-shared-headers-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ngx-shared-headers-demo/public"
+              }
+            ],
+            "styles": [
+              "projects/ngx-shared-headers-demo/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ngx-shared-headers-demo:build:production"
+            },
+            "development": {
+              "buildTarget": "ngx-shared-headers-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
+      }
+    }
   }
 }
