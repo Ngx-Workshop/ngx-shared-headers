@@ -1,5 +1,5 @@
 {
-  "name": "ngx-shared-headers",
+  "name": "@tmdjr/ngx-shared-headers",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^21.1.0",
