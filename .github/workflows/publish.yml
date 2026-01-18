@@ -16,12 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify npm token is configured
-        if: ${{ !secrets.NPM_TOKEN }}
-        run: |
-          echo "::error ::NPM_TOKEN secret is not configured. Add it under Settings > Secrets and variables > Actions."
-          exit 1
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
